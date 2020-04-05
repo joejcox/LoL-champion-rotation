@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Requires Riot Developer API Key
+You can get this from [Riot's Developer Page](https://developer.riotgames.com).
 
 ## Available Scripts
 
