@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const rotationSave = JSON.parse(localStorage.getItem("rotationz"));
+    const rotationSave = JSON.parse(localStorage.getItem("rotations"));
     const championsSave = JSON.parse(localStorage.getItem("champions"));
     const date = new Date().getDay();
     if (rotationSave && championsSave && date !== 3) {
