@@ -1,0 +1,8 @@
+.result-col {
+  padding: 0.2rem;
+}
+.result-col .wrap {
+  background: #f7f7f7;
+  border: 1px solid rgb(233, 233, 233);
+  padding: 1rem;
+}
