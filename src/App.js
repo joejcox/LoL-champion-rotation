@@ -14,16 +14,16 @@ class App extends Component {
       rotationIds: [],
       champions: [],
       cors: "https://cors-anywhere.herokuapp.com/",
-      apiKey: "RGAPI-1e141e7f-8636-4fcc-b8cb-5bfd8336510c",
+      apiKey: "RGAPI-333a4c8e-66a7-456a-a60b-88d5308ac3ec",
       siteInfo: {
         title: "League Rotation",
-        subtitle: "Find the latest champion rotation"
-      }
+        subtitle: "Find the latest champion rotation",
+      },
     };
   }
 
   componentDidMount() {
-    const rotationSave = JSON.parse(localStorage.getItem("rotation"));
+    const rotationSave = JSON.parse(localStorage.getItem("rotationz"));
     const championsSave = JSON.parse(localStorage.getItem("champions"));
     const date = new Date().getDay();
     if (rotationSave && championsSave && date !== 3) {
@@ -31,13 +31,13 @@ class App extends Component {
       this.setState({
         dataStored: true,
         rotationIds: rotationSave.freeChampionIds,
-        champions: championsSave.data
+        champions: championsSave.data,
       });
     } else {
       console.log("Need to fetch");
       const urls = [
-        `https://cors-anywhere.herokuapp.com/https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations/`,
-        `https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`
+        `https://cors-anywhere.herokuapp.com/https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations`,
+        `https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`,
       ];
 
       const options = {
@@ -49,14 +49,14 @@ class App extends Component {
           "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8,la;q=0.7",
           "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
           "content-type": "application/json",
-          "X-Riot-Token": this.state.apiKey
-        })
+          "X-Riot-Token": this.state.apiKey,
+        }),
       };
       console.log("fetching");
       // Fetch from endpoints
       this.isLoading(true);
       Promise.all([fetch(urls[0], options), fetch(urls[1], options)])
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         })
         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
@@ -64,13 +64,13 @@ class App extends Component {
           this.isLoading(false);
           this.setState({
             rotationIds: rotation.freeChampionIds,
-            champions: champions.data
+            champions: champions.data,
           });
 
           localStorage.setItem("rotation", JSON.stringify(rotation));
           localStorage.setItem("champions", JSON.stringify(champions));
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
 
@@ -90,8 +90,7 @@ class App extends Component {
             <Link
               className="button is-outlined"
               onClick={() => this.setState({ login: false })}
-              to="/"
-            >
+              to="/">
               Log Out
             </Link>
           </div>
@@ -100,8 +99,7 @@ class App extends Component {
           <Link
             className="button is-warning"
             to="/stats"
-            onClick={() => this.setState({ login: true })}
-          >
+            onClick={() => this.setState({ login: true })}>
             <strong>Log In</strong>
           </Link>
         ));
@@ -114,7 +112,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => (
+            render={(props) => (
               <Home
                 {...props}
                 siteName={this.state.siteName}
@@ -135,7 +133,7 @@ class App extends Component {
           <Route
             exact
             path="/about"
-            render={props => (
+            render={(props) => (
               <About
                 {...props}
                 siteName={this.state.siteName}
@@ -145,7 +143,7 @@ class App extends Component {
             )}
           />
           <Route
-            render={props => (
+            render={(props) => (
               <PageNoExist {...props} siteName={this.state.siteName} />
             )}
           />
