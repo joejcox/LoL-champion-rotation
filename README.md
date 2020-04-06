@@ -4,6 +4,8 @@ The app will fetch data from Riot Games API to display the latest champion rotat
 
 At the moment it will fetch all day on a Wednesday but will need to only fetch once. This is in development.
 
+[View Demo](https://lol-champion-rotation.herokuapp.com "LoL Champion Rotation Demo")
+
 ## Requires Riot Developer API Key
 You can get this from [Riot's Developer Page](https://developer.riotgames.com).
 
@@ -11,13 +13,17 @@ You can get this from [Riot's Developer Page](https://developer.riotgames.com).
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm dev`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### `npm start`
+
+Serve is used here for deploying to Heroku. Will not work locally - use 'npm dev' for development.
 
 ### `npm test`
 
