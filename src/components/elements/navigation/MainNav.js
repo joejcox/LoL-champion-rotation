@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MainNav = props => {
+const MainNav = (props) => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -24,9 +24,6 @@ const MainNav = props => {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <Link className="navbar-item has-text-black" to="/">
-            Home
-          </Link>
           <Link className="navbar-item has-text-black" to="/about">
             About
           </Link>
