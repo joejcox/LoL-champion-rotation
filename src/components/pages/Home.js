@@ -16,40 +16,26 @@ class Home extends Component {
       0.4,
       {
         opacity: 0,
-        y: 20
+        y: 20,
       },
       {
         opacity: 1,
         y: 0,
-        ease: "Power2.easeOut"
+        ease: "Power2.easeOut",
       }
     ).fromTo(
       ".hero-body .subtitle",
       0.4,
       {
         opacity: 0,
-        y: 20
+        y: 20,
       },
       {
         opacity: 1,
         y: 0,
-        ease: "Power2.easeOut"
+        ease: "Power2.easeOut",
       },
       0.2
-    );
-  }
-
-  componentDidUpdate() {
-    const tl = gsap.timeline();
-
-    tl.fromTo(
-      ".column",
-      0.8,
-      {
-        opacity: 0,
-        y: 20
-      },
-      { opacity: 1, y: 0, stagger: 0.1, ease: "Power2.easeInOut" }
     );
   }
 
@@ -73,19 +59,19 @@ class Home extends Component {
     let loading;
     const champions = [];
     const rotation = [];
-    Object.keys(this.props.champions).forEach(key => {
+    Object.keys(this.props.champions).forEach((key) => {
       return champions.push(this.props.champions[key]);
     });
 
-    this.props.rotation.forEach(id => {
-      champions.forEach(data => {
+    this.props.rotation.forEach((id) => {
+      champions.forEach((data) => {
         if (id === parseInt(data.key)) {
           rotation.push(data);
         }
       });
     });
     this.props.loading
-      ? (loading = rotation.map(result => {
+      ? (loading = rotation.map((result) => {
           return this.getCurrentRotation(
             result.key,
             result.name,
