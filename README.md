@@ -4,7 +4,7 @@ The app will fetch data from Riot Games API to display the latest champion rotat
 
 At the moment it will fetch all day on a Wednesday but will need to only fetch once. This is in development.
 
-## [View Demo](https://lol-champion-rotation.herokuapp.com)
+[View Demo](https://lol-champion-rotation.herokuapp.com)
 
 ## Requires Riot Developer API Key
 You can get this from [Riot's Developer Page](https://developer.riotgames.com).
