@@ -1,3 +1,5 @@
+# LoL Champion Rotation
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 The app will fetch data from Riot Games API to display the latest champion rotation. It will save the information in local storage in order to minimise calls. If no local storage exists it will fetch the information otherwise it will retrieve from storage. If the day is Wednesday it will fetch the information as this is patch day and a new champion rotation will be available. 
