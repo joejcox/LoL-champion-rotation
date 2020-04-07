@@ -16,7 +16,7 @@ const ChampionModal = (props) => {
       <div className="modal-content is-clipped has-background-white">
         <article className="media">
           <figure className="media-left">
-            <p className="image is-64x64">
+            <p className="image is-96x96">
               <img
                 className="image"
                 src={`http://ddragon.leagueoflegends.com/cdn/10.7.1/img/champion/${props.image}`}
@@ -24,7 +24,7 @@ const ChampionModal = (props) => {
               />
             </p>
           </figure>
-          <div className="media-content">
+          <div className="media-content is-clipped">
             <div className="content">
               <h3 className="title is-size-5-mobile is-size-4-tablet">
                 {props.name}
@@ -32,17 +32,15 @@ const ChampionModal = (props) => {
               <h4 className="subtitle is-size-6-mobile is-size-6-tablet is-size-5-desktop">
                 {props.title}
               </h4>
-            </div>
-          </div>
-          <div className="media-right">
-            <div className="tags">
-              {props.tags.map((tag) => {
-                return (
-                  <span key={`${props.id}${tag}`} className="tag is-warning">
-                    {tag}
-                  </span>
-                );
-              })}
+              <div className="tags">
+                {props.tags.map((tag) => {
+                  return (
+                    <span key={`${props.id}${tag}`} className="tag is-warning">
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </article>
