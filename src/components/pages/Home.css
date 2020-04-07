@@ -6,6 +6,10 @@
   padding: 0.5rem 0.5rem 1rem;
   background: white;
 }
+.modal-content {
+  padding: 2rem;
+  border-radius: 2px;
+}
 
 .no-margin {
   margin: 0;

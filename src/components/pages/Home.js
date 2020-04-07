@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import gsap from "gsap";
 import HomeHeader from "../elements/headers/HomeHeader";
+import Modal from "../elements/modals/ChampionModal";
 // import { Link } from "react-router-dom";
 import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
     super();
+    this.toggleInfo = this.toggleInfo.bind(this);
+    this.state = {
+      modalIsOpen: false,
+      modalId: null,
+    };
   }
   componentDidMount() {
     const tl = gsap.timeline();
@@ -39,11 +45,19 @@ class Home extends Component {
     );
   }
 
-  getCurrentRotation(key, name, title, img) {
+  toggleInfo(name, key) {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen,
+      modalId: `${name}${key}`,
+    });
+  }
+
+  getCurrentRotation(key, name, title, img, tags, description) {
     return (
       <div
         key={key}
-        className="column is-half-mobile is-one-quarter-tablet is-one-fifth-desktop has-text-centered">
+        className="column is-half-mobile is-one-quarter-tablet is-one-fifth-desktop has-text-centered"
+        onClick={() => this.toggleInfo(name, key)}>
         <div className="wrap">
           <img
             className="image"
@@ -55,6 +69,16 @@ class Home extends Component {
             {title}
           </h4>
         </div>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          modalId={this.state.modalId}
+          id={key}
+          name={name}
+          title={title}
+          image={img}
+          tags={tags}
+          description={description}
+        />
       </div>
     );
   }
@@ -80,7 +104,9 @@ class Home extends Component {
             result.key,
             result.name,
             result.title,
-            result.image.full
+            result.image.full,
+            result.tags,
+            result.blurb
           );
         }))
       : (loading = "Loading Data");
