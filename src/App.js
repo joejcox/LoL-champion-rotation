@@ -14,7 +14,7 @@ class App extends Component {
       rotationIds: [],
       champions: [],
       cors: "https://cors-anywhere.herokuapp.com/",
-      apiKey: "RGAPI-333a4c8e-66a7-456a-a60b-88d5308ac3ec",
+      apiKey: "RGAPI-741b8ed6-b5dd-446a-b35d-cbf0048d8660",
       siteInfo: {
         title: "League Rotation",
         subtitle: "Find the latest champion rotation",
