@@ -23,60 +23,60 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const rotationSave = JSON.parse(localStorage.getItem("rotations"));
-    const championsSave = JSON.parse(localStorage.getItem("champions"));
-    const date = new Date().getDay();
-    if (rotationSave && championsSave && date !== 2) {
-      console.log("loading from saved data");
-      this.setState({
-        dataStored: true,
-        rotationIds: rotationSave.freeChampionIds,
-        champions: championsSave.data,
-      });
-    } else {
-      console.log("Need to fetch");
-      const urls = [
-        `https://cors-anywhere.herokuapp.com/https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations`,
-        `https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`,
-      ];
+    // const rotationSave = JSON.parse(localStorage.getItem("rotations"));
+    // const championsSave = JSON.parse(localStorage.getItem("champions"));
+    // const date = new Date().getDay();
+    // if (rotationSave && championsSave && date !== 2) {
+    //   console.log("loading from saved data");
+    //   this.setState({
+    //     dataStored: true,
+    //     rotationIds: rotationSave.freeChampionIds,
+    //     champions: championsSave.data,
+    //   });
+    // } else {
+    //   console.log("Need to fetch");
+    const urls = [
+      `https://cors-anywhere.herokuapp.com/https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations`,
+      `https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`,
+    ];
 
-      const options = {
-        method: "GET",
-        cache: "force-cache",
-        headers: new Headers({
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-          "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8,la;q=0.7",
-          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-          "content-type": "application/json",
-          "X-Riot-Token": this.state.apiKey,
-        }),
-      };
-      console.log("fetching");
-      // Fetch from endpoints
-      this.isLoading(true);
-      Promise.all([fetch(urls[0], options), fetch(urls[1], options)])
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(([rotation, champions]) => {
-          this.isLoading(false);
-          this.setState({
-            rotationIds: rotation.freeChampionIds,
-            champions: champions.data,
-          });
-
-          localStorage.setItem("rotation", JSON.stringify(rotation));
-          localStorage.setItem("champions", JSON.stringify(champions));
-        })
-        .catch((err) => {
-          console.log(err);
+    const options = {
+      method: "GET",
+      cache: "force-cache",
+      headers: new Headers({
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+        "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8,la;q=0.7",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "content-type": "application/json",
+        "X-Riot-Token": this.state.apiKey,
+      }),
+    };
+    console.log("fetching");
+    // Fetch from endpoints
+    this.isLoading(true);
+    Promise.all([fetch(urls[0], options), fetch(urls[1], options)])
+      .catch((err) => {
+        console.log(err);
+      })
+      .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+      .then(([rotation, champions]) => {
+        this.isLoading(false);
+        this.setState({
+          rotationIds: rotation.freeChampionIds,
+          champions: champions.data,
         });
 
-      this.setState({ dataStored: true });
-    }
+        // localStorage.setItem("rotation", JSON.stringify(rotation));
+        // localStorage.setItem("champions", JSON.stringify(champions));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.setState({ dataStored: true });
   }
+  // }
 
   isLoading(bool) {
     this.setState({ isLoading: bool });
