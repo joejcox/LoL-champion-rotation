@@ -53,7 +53,7 @@ class ChampionModal extends Component {
     let champInfo;
     if (this.state.readMore === true) {
       const champ = this.props.champId;
-      console.log(this.state.champInfo[champ]);
+      // console.log(this.state.champInfo[champ]);
       champInfo = (
         <>
           <div className="tags more-info">
