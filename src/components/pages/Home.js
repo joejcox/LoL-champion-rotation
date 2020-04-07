@@ -58,7 +58,7 @@ class Home extends Component {
     });
   }
 
-  getCurrentRotation(key, name, title, img, tags, description) {
+  getCurrentRotation(id, key, name, title, img, tags, description) {
     return (
       <React.Fragment key={`${name}${key}`}>
         <div
@@ -75,14 +75,10 @@ class Home extends Component {
             <h4 className="subtitle is-size-6-mobile is-size-6-tablet is-size-5-desktop">
               {title}
             </h4>
-            {/* <button
-            className="button is-primary is-small"
-            onClick={() => this.toggleInfo(name, key)}>
-            More Info
-          </button> */}
           </div>
         </div>
         <Modal
+          champId={id}
           isOpen={this.state.modalIsOpen}
           modalId={this.state.modalId}
           key={`${name}${key}${title}`}
@@ -93,6 +89,7 @@ class Home extends Component {
           tags={tags}
           description={description}
           clicked={() => this.closeModal()}
+          apiKey={this.props.apiKey}
         />
       </React.Fragment>
     );
@@ -116,6 +113,7 @@ class Home extends Component {
     this.props.loading
       ? (loading = rotation.map((result) => {
           return this.getCurrentRotation(
+            result.id,
             result.key,
             result.name,
             result.title,

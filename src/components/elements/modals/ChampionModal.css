@@ -1,0 +1,11 @@
+.button.more-info {
+  padding: 0;
+  text-decoration: underline;
+  color: rgb(36, 66, 233);
+  border: 0;
+  height: auto;
+  margin-left: 0.5rem;
+}
+.button.more-info:hover {
+  color: rgb(68, 18, 207);
+}
