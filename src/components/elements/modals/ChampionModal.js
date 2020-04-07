@@ -49,7 +49,7 @@ const ChampionModal = (props) => {
         <article className="media">
           <div className="media-content">
             <div className="content">
-              <p>{props.description}</p>
+              <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
             </div>
           </div>
         </article>
