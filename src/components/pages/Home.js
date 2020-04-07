@@ -41,15 +41,19 @@ class Home extends Component {
 
   getCurrentRotation(key, name, title, img) {
     return (
-      <div key={key} className="column is-2 has-text-centered">
+      <div
+        key={key}
+        className="column is-half-mobile is-one-quarter-tablet is-one-fifth-desktop has-text-centered">
         <div className="wrap">
           <img
             className="image"
             src={`http://ddragon.leagueoflegends.com/cdn/10.7.1/img/champion/${img}`}
             alt={name}
           />
-          <h3 className="title is-3">{name}</h3>
-          <h4 className="subtitle is-6">{title}</h4>
+          <h3 className="title is-size-5-mobile is-size-4-tablet">{name}</h3>
+          <h4 className="subtitle is-size-6-mobile is-size-6-tablet is-size-5-desktop">
+            {title}
+          </h4>
         </div>
       </div>
     );
@@ -88,7 +92,9 @@ class Home extends Component {
         ))
       : (fetching = (
           <>
-            <div className="columns is-multiline no-margin">{loading}</div>
+            <div className="columns is-mobile is-multiline no-margin">
+              {loading}
+            </div>
           </>
         ));
 

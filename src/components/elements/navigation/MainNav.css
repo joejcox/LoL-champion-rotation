@@ -1,0 +1,40 @@
+@media screen and (max-width: 1023px) {
+  .burger {
+    transition: 0.2s ease;
+    background: white;
+    box-shadow: none;
+    border: none;
+  }
+  .burger:hover,
+  .burger:active,
+  .burger:focus {
+    background: rgb(243, 203, 94);
+  }
+  #mainNavigation {
+    transition: 0.2s ease;
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  #mainNavigation.is-active {
+    visibility: visible;
+    opacity: 1;
+    background: rgb(255, 255, 255);
+    box-shadow: none;
+  }
+  #mainNavigation .navbar-item {
+    text-align: center;
+  }
+  #mainNavigation.is-active .navbar-item.has-text-black:hover {
+    background: transparent;
+    color: rgb(250, 201, 65) !important;
+  }
+  #mainNavigation.is-active .button {
+    width: 100%;
+  }
+}
