@@ -11,14 +11,6 @@ class ChampionModal extends Component {
     };
   }
 
-  // componentDidUpdate() {
-  //   if (this.props.modalIsOpen === true) {
-  //     this.setState({
-  //       readMore: false,
-  //     });
-  //   }
-  // }
-
   fetchInfo(championName) {
     const options = {
       method: "GET",
@@ -49,6 +41,7 @@ class ChampionModal extends Component {
 
   render() {
     let modalClass = "modal";
+
     if (this.props.isOpen) {
       if (this.props.modalId === `${this.props.name}${this.props.id}`) {
         modalClass = "modal is-active";
@@ -56,20 +49,37 @@ class ChampionModal extends Component {
         modalClass = "modal";
       }
     }
-
-    // const theChamp = this.props.champId;
-    // let champLore;
-    // if (this.state.readMore === true) {
-    //   console.log(this.state.champInfo[this.props.champId]);
-    //   champLore = this.state.champInfo[theChamp].lore;
-    // } else {
-    //   champLore = "Hello my dear";
-    // }
     let champInfo;
     if (this.state.readMore === true) {
       const champ = this.props.champId;
+      console.log(this.state.champInfo[champ]);
       champInfo = (
-        <p className="content is-medium">{this.state.champInfo[champ].lore}</p>
+        <>
+          <div className="tags more-info">
+            <span className="tag is-dark">
+              Attack: {this.props.info.attack}
+            </span>
+            <span className="tag is-dark">
+              Defense: {this.props.info.defense}
+            </span>
+            <span className="tag is-dark">Magic: {this.props.info.magic}</span>
+            <span className="tag is-dark">
+              Difficulty: {this.props.info.difficulty}
+            </span>
+          </div>
+
+          <div className="is-divider" data-content="LORE"></div>
+          <p className="content is-medium">
+            {this.state.champInfo[champ].lore}
+            <button
+              className="button more-info is-medium"
+              onClick={() => {
+                this.setState({ readMore: false });
+              }}>
+              Read less
+            </button>
+          </p>
+        </>
       );
     } else {
       champInfo = (
@@ -127,16 +137,7 @@ class ChampionModal extends Component {
           </article>
           <article className="media">
             <div className="media-content">
-              <div className="content">
-                {/* <ChampInfo
-                  readMore={this.state.readMore}
-                  champId={this.props.champId}
-                  champLore={champLore}
-                  description={this.props.description}
-                  clicked={() => this.fetchInfo(this.props.champId)}
-                /> */}
-                {champInfo}
-              </div>
+              <div className="content">{champInfo}</div>
             </div>
           </article>
           <button

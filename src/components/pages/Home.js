@@ -58,7 +58,7 @@ class Home extends Component {
     });
   }
 
-  getCurrentRotation(id, key, name, title, img, tags, description) {
+  getCurrentRotation(id, key, name, title, img, tags, description, info) {
     return (
       <React.Fragment key={`${name}${key}`}>
         <div
@@ -90,6 +90,7 @@ class Home extends Component {
           description={description}
           clicked={() => this.closeModal()}
           apiKey={this.props.apiKey}
+          info={info}
         />
       </React.Fragment>
     );
@@ -119,7 +120,8 @@ class Home extends Component {
             result.title,
             result.image.full,
             result.tags,
-            result.blurb
+            result.blurb,
+            result.info
           );
         }))
       : (loading = "Loading Data");

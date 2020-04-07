@@ -9,3 +9,7 @@
 .button.more-info:hover {
   color: rgb(68, 18, 207);
 }
+.tags.more-info {
+  margin: 0 0 -1rem;
+  justify-content: center;
+}
