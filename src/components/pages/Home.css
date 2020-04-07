@@ -1,7 +1,7 @@
 .column .wrap {
   cursor: pointer;
   transition: 0.2s ease;
-  box-shadow: 0 0 8px rgba(33, 33, 33, 0.15);
+  box-shadow: 0 0 8px rgba(195, 195, 195, 0.15);
   height: 100%;
   padding: 0.5rem 0.5rem 1rem;
   background: white;
@@ -67,13 +67,3 @@
 .overlay.show {
   display: flex;
 }
-
-/* @media screen and (min-width: 1023px) {
-  .column:hover .wrap {
-    transition: 0.2s ease;
-    box-shadow: 0 0 8px 2px rgba(33, 33, 33, 0.25);
-    transform: scale(1.01);
-    height: 100%;
-    padding: 0.5rem;
-  }
-} */
