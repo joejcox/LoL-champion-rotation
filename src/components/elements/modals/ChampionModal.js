@@ -4,15 +4,15 @@ const ChampionModal = (props) => {
   let modalClass = "modal";
   if (props.isOpen) {
     if (props.modalId === `${props.name}${props.id}`) {
-      console.log(props.name);
       modalClass = "modal is-active";
     } else {
       modalClass = "modal";
     }
   }
+
   return (
     <div className={modalClass}>
-      <div className="modal-background"></div>
+      <div className="modal-background" onClick={props.clicked}></div>
       <div className="modal-content is-clipped has-background-white">
         <article className="media">
           <figure className="media-left">
@@ -53,7 +53,10 @@ const ChampionModal = (props) => {
             </div>
           </div>
         </article>
-        <button className="modal-close is-large" aria-label="close"></button>
+        <button
+          className="modal-close is-large"
+          aria-label="close"
+          onClick={props.clicked}></button>
       </div>
     </div>
   );
