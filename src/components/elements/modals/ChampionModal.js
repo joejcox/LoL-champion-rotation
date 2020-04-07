@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ChampionModal.css";
-// import ChampInfo from "./ChampInfo";
 
 class ChampionModal extends Component {
   constructor(props) {
@@ -35,6 +34,7 @@ class ChampionModal extends Component {
         this.setState({
           champInfo: data.data,
           readMore: true,
+          fetching: false,
         });
       });
   }
@@ -49,6 +49,7 @@ class ChampionModal extends Component {
         modalClass = "modal";
       }
     }
+
     let champInfo;
     if (this.state.readMore === true) {
       const champ = this.props.champId;
@@ -95,6 +96,7 @@ class ChampionModal extends Component {
             {" "}
             Read more
           </button>
+          {this.fetching}
         </>
       );
     }
