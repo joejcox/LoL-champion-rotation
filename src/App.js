@@ -14,7 +14,7 @@ class App extends Component {
       rotationIds: [],
       champions: [],
       cors: "https://cors-anywhere.herokuapp.com/",
-      apiKey: "RGAPI-741b8ed6-b5dd-446a-b35d-cbf0048d8660",
+      apiKey: process.env.REACT_APP_RIOT_API_KEY,
       siteInfo: {
         title: "League Rotation",
         subtitle: "Find the latest champion rotation",
@@ -23,18 +23,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const rotationSave = JSON.parse(localStorage.getItem("rotations"));
-    // const championsSave = JSON.parse(localStorage.getItem("champions"));
-    // const date = new Date().getDay();
-    // if (rotationSave && championsSave && date !== 2) {
-    //   console.log("loading from saved data");
-    //   this.setState({
-    //     dataStored: true,
-    //     rotationIds: rotationSave.freeChampionIds,
-    //     champions: championsSave.data,
-    //   });
-    // } else {
-    //   console.log("Need to fetch");
     const urls = [
       `https://cors-anywhere.herokuapp.com/https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations`,
       `https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`,
@@ -53,7 +41,6 @@ class App extends Component {
       }),
     };
     console.log("fetching");
-    // Fetch from endpoints
     this.isLoading(true);
     Promise.all([fetch(urls[0], options), fetch(urls[1], options)])
       .catch((err) => {
@@ -66,9 +53,6 @@ class App extends Component {
           rotationIds: rotation.freeChampionIds,
           champions: champions.data,
         });
-
-        // localStorage.setItem("rotation", JSON.stringify(rotation));
-        // localStorage.setItem("champions", JSON.stringify(champions));
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +60,6 @@ class App extends Component {
 
     this.setState({ dataStored: true });
   }
-  // }
 
   isLoading(bool) {
     this.setState({ isLoading: bool });
