@@ -97,6 +97,15 @@ class Home extends Component {
   }
 
   render() {
+    const {
+      siteName,
+      title,
+      subtitle,
+      statsButtonText,
+      clicked,
+      isLoggedIn,
+    } = this.props;
+
     let loading;
     const champions = [];
     const rotation = [];
@@ -111,17 +120,19 @@ class Home extends Component {
         }
       });
     });
+
     this.props.loading
       ? (loading = rotation.map((result) => {
+          const { id, key, name, title, tags, blurb, info } = result;
           return this.getCurrentRotation(
-            result.id,
-            result.key,
-            result.name,
-            result.title,
+            id,
+            key,
+            name,
+            title,
             result.image.full,
-            result.tags,
-            result.blurb,
-            result.info
+            tags,
+            blurb,
+            info
           );
         }))
       : (loading = "Loading Data");
@@ -138,16 +149,15 @@ class Home extends Component {
             </div>
           </>
         ));
-
     return (
       <div id="home-content">
         <HomeHeader
-          siteName={this.props.siteName}
-          title={this.props.title}
-          subtitle={this.props.subtitle}
-          statsButtonText={this.props.statsButtonText}
-          clicked={this.props.clicked}
-          isLoggedIn={this.props.isLoggedIn}
+          siteName={siteName}
+          title={title}
+          subtitle={subtitle}
+          statsButtonText={statsButtonText}
+          clicked={clicked}
+          isLoggedIn={isLoggedIn}
         />
 
         <section className="section" id="champion-rotation">
