@@ -30,15 +30,16 @@ class App extends Component {
 
     const options = {
       method: "GET",
-      cache: "force-cache",
       headers: new Headers({
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36",
         "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8,la;q=0.7",
         "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
         "content-type": "application/json",
+        "X-Requested-With": "FetchAPI",
         "X-Riot-Token": this.state.apiKey,
       }),
+      cache: "force-cache",
     };
     console.log("fetching");
     this.isLoading(true);
@@ -73,7 +74,8 @@ class App extends Component {
             <Link
               className="button is-outlined"
               onClick={() => this.setState({ login: false })}
-              to="/">
+              to="/"
+            >
               Log Out
             </Link>
           </div>
@@ -82,7 +84,8 @@ class App extends Component {
           <Link
             className="button is-warning"
             to="/stats"
-            onClick={() => this.setState({ login: true })}>
+            onClick={() => this.setState({ login: true })}
+          >
             <strong>Log In</strong>
           </Link>
         ));
