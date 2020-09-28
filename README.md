@@ -1,10 +1,16 @@
 # LoL Champion Rotation
 
-The app will fetch data from Riot Games API to display the latest champion rotation.
+The app will fetch data from Riot Games API to display the latest champion rotation. I created this app when I first started learning React so it is a bit messy.
 
 ## Requires Riot Developer API Key
 
 You can get this from [Riot's Developer Page](https://developer.riotgames.com).
+
+## Todo
+
+Refactor code to use hooks + portals for modals.
+Use one modal and populate with data as opposed to generating a modal for each champion.
+Implement caching.
 
 ## Available Scripts
 
