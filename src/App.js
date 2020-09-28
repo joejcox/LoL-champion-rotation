@@ -39,7 +39,6 @@ class App extends Component {
         "X-Requested-With": "FetchAPI",
         "X-Riot-Token": this.state.apiKey,
       }),
-      cache: "force-cache",
     };
     console.log("fetching");
     this.isLoading(true);
