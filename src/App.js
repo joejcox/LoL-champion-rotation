@@ -6,21 +6,18 @@ import PageNoExist from "./components/pages/PageNoExist";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      siteName: "LoLStats",
-      login: false,
-      rotationIds: [],
-      champions: [],
-      cors: "https://cors-anywhere.herokuapp.com/",
-      apiKey: process.env.REACT_APP_RIOT_API_KEY,
-      siteInfo: {
-        title: "League Rotation",
-        subtitle: "Find the latest champion rotation",
-      },
-    };
-  }
+  state = {
+    siteName: "LoLStats",
+    login: false,
+    rotationIds: [],
+    champions: [],
+    cors: "https://cors-anywhere.herokuapp.com/",
+    apiKey: process.env.REACT_APP_RIOT_API_KEY,
+    siteInfo: {
+      title: "League Rotation",
+      subtitle: "Find the latest champion rotation",
+    },
+  };
 
   componentDidMount() {
     const urls = [
@@ -40,16 +37,15 @@ class App extends Component {
         "X-Riot-Token": this.state.apiKey,
       }),
     };
-    console.log("fetching");
     this.isLoading(true);
     Promise.all([fetch(urls[0], options), fetch(urls[1], options)])
       .catch((err) => {
         console.log(err);
       })
       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-      .then(([rotation, champions]) => {
-        this.isLoading(false);
-        this.setState({
+      .then(async ([rotation, champions]) => {
+        await this.isLoading(false);
+        await this.setState({
           rotationIds: rotation.freeChampionIds,
           champions: champions.data,
         });
@@ -73,8 +69,7 @@ class App extends Component {
             <Link
               className="button is-outlined"
               onClick={() => this.setState({ login: false })}
-              to="/"
-            >
+              to="/">
               Log Out
             </Link>
           </div>
@@ -83,13 +78,21 @@ class App extends Component {
           <Link
             className="button is-warning"
             to="/stats"
-            onClick={() => this.setState({ login: true })}
-          >
+            onClick={() => this.setState({ login: true })}>
             <strong>Log In</strong>
           </Link>
         ));
 
     const { title, subtitle } = this.state.siteInfo;
+    const {
+      siteName,
+      dataStored,
+      rotationIds,
+      champions,
+      isLoading,
+      login,
+      apiKey,
+    } = this.state;
     console.log();
     return (
       <Router>
@@ -97,41 +100,35 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={(props) => (
+            render={() => (
               <Home
-                {...props}
-                siteName={this.state.siteName}
+                siteName={siteName}
                 title={title}
                 subtitle={subtitle}
-                loading={this.state.dataStored}
-                rotation={this.state.rotationIds}
-                champions={this.state.champions}
+                loading={dataStored}
+                rotation={rotationIds}
+                champions={champions}
                 statsButtonText={loginText}
                 isAuthed={true}
-                isLoading={this.state.isLoading}
-                isLoggedIn={this.state.login}
-                apiKey={this.state.apiKey}
-                clicked={() => this.setState({ login: !this.state.login })}
+                isLoading={isLoading}
+                isLoggedIn={login}
+                apiKey={apiKey}
+                clicked={() => this.setState({ login: !login })}
               />
             )}
           />
           <Route
             exact
             path="/about"
-            render={(props) => (
+            render={() => (
               <About
-                {...props}
-                siteName={this.state.siteName}
+                siteName={siteName}
                 statsButtonText={loginText}
                 isAuthed={true}
               />
             )}
           />
-          <Route
-            render={(props) => (
-              <PageNoExist {...props} siteName={this.state.siteName} />
-            )}
-          />
+          <Route render={() => <PageNoExist siteName={siteName} />} />
         </Switch>
       </Router>
     );

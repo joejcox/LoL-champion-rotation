@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import gsap from "gsap";
 import HomeHeader from "../elements/headers/HomeHeader";
 import Modal from "../elements/modals/ChampionModal";
-// import { Link } from "react-router-dom";
 import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.toggleInfo = this.toggleInfo.bind(this);
     this.state = {
       modalIsOpen: false,
@@ -59,6 +58,7 @@ class Home extends Component {
   }
 
   getCurrentRotation(id, key, name, title, img, tags, description, info) {
+    const { modalIsOpen, modalId } = this.state;
     return (
       <React.Fragment key={`${name}${key}`}>
         <div
@@ -79,8 +79,8 @@ class Home extends Component {
         </div>
         <Modal
           champId={id}
-          isOpen={this.state.modalIsOpen}
-          modalId={this.state.modalId}
+          isOpen={modalIsOpen}
+          modalId={modalId}
           key={`${name}${key}${title}`}
           id={key}
           name={name}
@@ -104,17 +104,19 @@ class Home extends Component {
       statsButtonText,
       clicked,
       isLoggedIn,
+      champions,
+      isLoading,
     } = this.props;
 
     let loading;
-    const champions = [];
+    const champs = [];
     const rotation = [];
-    Object.keys(this.props.champions).forEach((key) => {
-      return champions.push(this.props.champions[key]);
+    Object.keys(champions).forEach((key) => {
+      return champs.push(champions[key]);
     });
 
     this.props.rotation.forEach((id) => {
-      champions.forEach((data) => {
+      champs.forEach((data) => {
         if (id === parseInt(data.key)) {
           rotation.push(data);
         }
@@ -122,23 +124,24 @@ class Home extends Component {
     });
 
     this.props.loading
-      ? (loading = rotation.map((result) => {
-          const { id, key, name, title, tags, blurb, info } = result;
-          return this.getCurrentRotation(
-            id,
-            key,
-            name,
-            title,
-            result.image.full,
-            tags,
-            blurb,
-            info
-          );
-        }))
+      ? (loading = rotation.map(
+          ({ id, key, name, title, tags, blurb, info, image: { full } }) => {
+            return this.getCurrentRotation(
+              id,
+              key,
+              name,
+              title,
+              full,
+              tags,
+              blurb,
+              info
+            );
+          }
+        ))
       : (loading = "Loading Data");
 
     let fetching;
-    this.props.isLoading
+    isLoading
       ? (fetching = (
           <h2 className="title is-1 has-text-centered">Loading...</h2>
         ))
